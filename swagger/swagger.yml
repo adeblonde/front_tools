@@ -1,0 +1,90 @@
+swagger: "2.0"
+info:
+  title: Front Data API
+  description: API for Data toolchain
+  version: '0.1'
+host: PROD_URL
+basePath: /v1
+schemes:
+  - https
+
+paths:
+  /answers:
+    get:
+      operationId: getAnswers
+      summary: Get all metadata about answers available
+      responses:
+        '200':
+          description: A json array with all the answers' metadata
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/answer_metadata'
+      produces:
+        - application/json
+    post:
+      operationId: queryAnswer
+      summary: query an answer
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/answer'
+      responses:
+        '200':
+          description: Successfully obtained answer
+
+  /answers/{answerId}:
+    get:
+      operationId: getAnswer
+      summary: Get a Answer
+      parameters:
+        - name: answerId
+          in: path
+          description: ID of answer to get
+          required: true
+          type: integer
+          format: int64
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: A json array with the answer's properties and the answer's string
+          schema:
+            $ref: '#/definitions/answer'
+          
+    put:
+      operationId: updateAnswer
+      summary: Update answer
+      parameters:
+        - name: answerId
+          in: path
+          description: ID of answer to get
+          required: true
+          type: integer
+          format: int64
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/answer'
+      responses:
+        '405':
+          description: Invalid input
+
+definitions:
+  answer:
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      content:
+        type: string
+  answer_metadata:
+    properties:
+      id:
+        type: integer
+      name:
+        type: string

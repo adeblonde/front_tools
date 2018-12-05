@@ -1,5 +1,16 @@
 # Front Tools
 
+## Swagger REST API
+
+The swagger of the API is defined in `swagger/swagger.yml`.
+To generate the code of the associated server in Python-Flask, go to the folder `swagger`, then run :
+
+```bash
+./prepare_api.sh
+```
+
+It will create a folder of code in `server_swagger`
+
 ## Electron template
 
 This template is based on the project [Electron boilerplate](https://github.com/electron-react-boilerplate/electron-react-boilerplate)
@@ -31,3 +42,22 @@ Run :
 ```bash
 yarn dev
 ```
+
+## Running both front and back
+
+In a first console, run
+
+```bash
+cd electron-template
+yarn dev
+```
+
+In another console, run
+
+```bash
+cd server_swagger/api
+pip3 install -r requirements.txt
+python3 -m swagger_server
+```
+
+Then use the Electron app

@@ -1,0 +1,100 @@
+---
+swagger: "2.0"
+info:
+  description: "API for Data toolchain"
+  version: "0.1"
+  title: "Front Data API"
+host: "localhost"
+basePath: "/v1"
+schemes:
+- "https"
+paths:
+  /answers:
+    get:
+      summary: "Get all metadata about answers available"
+      operationId: "get_answers"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "A json array with all the answers' metadata"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/answer_metadata"
+      x-swagger-router-controller: "swagger_server.controllers.default_controller"
+    post:
+      summary: "query an answer"
+      operationId: "query_answer"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/answer"
+      responses:
+        200:
+          description: "Successfully obtained answer"
+      x-swagger-router-controller: "swagger_server.controllers.default_controller"
+  /answers/{answerId}:
+    get:
+      summary: "Get a Answer"
+      operationId: "get_answer"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "answerId"
+        in: "path"
+        description: "ID of answer to get"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "A json array with the answer's properties and the answer's\
+            \ string"
+          schema:
+            $ref: "#/definitions/answer"
+      x-swagger-router-controller: "swagger_server.controllers.default_controller"
+    put:
+      summary: "Update answer"
+      operationId: "update_answer"
+      parameters:
+      - name: "answerId"
+        in: "path"
+        description: "ID of answer to get"
+        required: true
+        type: "integer"
+        format: "int64"
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/answer"
+      responses:
+        405:
+          description: "Invalid input"
+      x-swagger-router-controller: "swagger_server.controllers.default_controller"
+definitions:
+  answer:
+    properties:
+      id:
+        type: "integer"
+      name:
+        type: "string"
+      content:
+        type: "string"
+    example:
+      name: "name"
+      id: 0
+      content: "content"
+  answer_metadata:
+    properties:
+      id:
+        type: "integer"
+      name:
+        type: "string"
+    example:
+      name: "name"
+      id: 0
