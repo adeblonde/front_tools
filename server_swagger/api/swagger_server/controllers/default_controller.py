@@ -54,7 +54,6 @@ def query_answer(body):  # noqa: E501
 	# return 'do some magic!'
 	return answer
 
-
 def update_answer(answerId, body):  # noqa: E501
 	"""Update answer
 
