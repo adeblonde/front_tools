@@ -11,6 +11,20 @@ To generate the code of the associated server in Python-Flask, go to the folder 
 
 It will create a folder of code in `server_swagger`
 
+You can run locally the Flask REST API using the following command :
+
+```bash
+cd PATH_TO_SERVER_FOLDER
+python3 -m swagger_server
+```
+
+You can then test you server from another console :
+
+```bash
+curl -X GET http://localhost:8080/v1/answers
+curl -H "Content-Type: application/json" -X POST -d '{"id":1,"name":"test_name","content":"test_content"}' http://localhost:8080/v1/answers
+```
+
 ## Electron template
 
 This template is based on the project [Electron boilerplate](https://github.com/electron-react-boilerplate/electron-react-boilerplate)
@@ -61,3 +75,30 @@ python3 -m swagger_server
 ```
 
 Then use the Electron app
+
+## Adding new pages to the app
+
+add the new route in `app/constants/routes.json` :
+
+```json
+{
+	"NEWPAGE" : "/newpage"
+}
+```
+
+add the new container in `app/containers/NewPage.js`
+
+add the new route to the Router in `Routes.js` :
+
+```js
+import NewPage from './container/NewPage';
+
+export default () => (
+  <App>
+    <Switch>
+      <Route path={routes.NEWPAGE} component={NewPage} />
+      <Route path={routes.HOME} component={HomePage} />
+    </Switch>
+  </App>
+);
+```
