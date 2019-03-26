@@ -1,0 +1,8 @@
+{
+  "HOME": "/",
+  "CHATBOT" : "/chatbot",
+  "COUNTER": "/counter",
+  "APISERVER": "/api",
+  "DASHBOARD": "/dashboard",
+  "GRID": "/grid"
+}
